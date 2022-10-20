@@ -71,6 +71,7 @@ def colocations(path_to_ERA5_data, year_string_idx, month):
     base_path = '/home/bdc2/aodhan/ROM_SAF/www.romsaf.org/pub/icdr/v1-series/profs/*/atm/'
     year_of_TLS_path = base_path + year_string_idx + '/*TLS*'
     TLS_yearly_files = glob.glob(year_of_TLS_path)
+    print(TLS_yearly_files)
     one_year_TLS_files = []
     for sat_file in TLS_yearly_files:
         one_sat_one_year_TLS = np.load(sat_file, allow_pickle=True)
@@ -126,12 +127,12 @@ def colocations(path_to_ERA5_data, year_string_idx, month):
     np.save('/home/bdc2/aodhan/ROM_SAF/collocations/{monthString}_{year_idx}_ERA_5_colocated_occultations'.format(monthString=str(month),
         year_idx=year_string_idx), monthly_synthetic_TLS_map)
 
-for year in range(2017, 2023):
+for year in range(2021, 2023):
     for month in range(1, 13):
-        try:
-            year_string_idx = str(year)
-            path_to_colocations = '/home/disk/pna2/aodhan/ERA5_hourly_data/{monthString}_{year_idx}_ERA5.nc'.format(
-                monthString=months_as_strings[month-1], year_idx=year_string_idx)
-            colocations(path_to_colocations, year_string_idx, month)
-        except:
-            continue
+        #try:
+        year_string_idx = str(year)
+        path_to_colocations = '/home/disk/pna2/aodhan/ERA5_hourly_data/{monthString}_{year_idx}_ERA5.nc'.format(
+            monthString=months_as_strings[month-1], year_idx=year_string_idx)
+        colocations(path_to_colocations, year_string_idx, month)
+        #except:
+        #    continue
